@@ -32,7 +32,7 @@ async def handle_message(update: Update, context):
 
 # Налаштування бота
 if __name__ == "__main__":
-    TOKEN = os.getenv("7833529200:AAFwgSYGCUqCfT8zXd3dxQCWnB0sYtLWqo4")  # Отримуємо токен з середовища
+    TOKEN = "7833529200:AAFwgSYGCUqCfT8zXd3dxQCWnB0sYtLWqo4"  # Отримуємо токен з середовища
     app = ApplicationBuilder().token(TOKEN).build()
 
     app.add_handler(CommandHandler("start", start))

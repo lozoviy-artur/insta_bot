@@ -25,12 +25,13 @@ async def handle_message(update: Update, context):
     message = update.message
     chat_type = message.chat.type
 
-    # Перевіряємо, чи бот у групі, і чи повідомлення адресоване йому
-    if chat_type in ["group", "supergroup"]:
-        if not (message.text.startswith(f"@{context.bot.username}") or message.reply_to_message and message.reply_to_message.from_user.id == context.bot.id):
-            return  # Ігноруємо, якщо бот не згадано
+    # Перевіряємо, чи повідомлення адресоване боту
+    if not (message.text.startswith(f"@{context.bot.username}") or 
+            (message.reply_to_message and message.reply_to_message.from_user.id == context.bot.id)):
+        return  # Ігноруємо, якщо бот не згадано або це не відповідь на його повідомлення
 
-    url = message.text.replace(f"@{context.bot.username}", "").strip()  # Видаляємо згадку про бота
+    # Видаляємо згадку про бота, якщо вона є
+    url = message.text.replace(f"@{context.bot.username}", "").strip()
     try:
         video_path = download_video(url)  # Download video
         with open(video_path, 'rb') as video_file:
